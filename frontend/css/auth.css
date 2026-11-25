@@ -1,0 +1,341 @@
+/* ==========================================================================
+   CineLux — Authentication (login / register) & account pages.
+   Cinematic split layout: brand panel + form panel.
+   ========================================================================== */
+
+.auth-shell {
+  min-height: calc(100vh - var(--header-h));
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+}
+
+/* ---- Left brand panel ------------------------------------------------------------------ */
+.auth-brand {
+  position: relative;
+  display: grid;
+  align-content: center;
+  gap: 1.6rem;
+  padding: clamp(2rem, 5vw, 4.5rem);
+  overflow: hidden;
+  background-color: #080D1A;
+  border-right: 1px solid var(--line);
+}
+
+.auth-brand__art {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.auth-brand__art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.42;
+  filter: contrast(1.08) saturate(1.15);
+}
+
+.auth-brand__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(8, 13, 26, 0.35) 0%, rgba(8, 13, 26, 0.65) 50%, rgba(8, 13, 26, 0.92) 100%),
+    radial-gradient(circle at 40% 30%, transparent 15%, rgba(8, 13, 26, 0.85) 85%);
+}
+
+.auth-brand__reel,
+.auth-brand__quote,
+.auth-brand__points {
+  position: relative;
+  z-index: 2;
+}
+
+.auth-brand__reel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+  max-width: 380px;
+}
+
+.auth-brand__frame {
+  aspect-ratio: 2 / 3;
+  border-radius: 12px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  transition: transform var(--t-med) var(--ease), box-shadow var(--t-med) var(--ease);
+}
+
+.auth-brand__frame:nth-child(1) { transform: rotate(-2.4deg) translateY(8px); }
+.auth-brand__frame:nth-child(2) { transform: translateY(-6px) scale(1.06); z-index: 2; }
+.auth-brand__frame:nth-child(3) { transform: rotate(2.4deg) translateY(10px); }
+
+.auth-brand__frame:hover {
+  transform: translateY(-8px) scale(1.08);
+  box-shadow: 0 22px 42px rgba(0, 0, 0, 0.65), 0 0 20px rgba(214, 179, 106, 0.25);
+  z-index: 3;
+}
+
+.auth-brand__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.95;
+  transition: opacity var(--t-fast) var(--ease), transform var(--t-med) var(--ease);
+}
+
+.auth-brand__frame .poster-fallback {
+  border-radius: 12px;
+}
+
+.auth-brand__quote {
+  max-width: 42ch;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+  line-height: 1.45;
+  color: var(--text);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+}
+
+.auth-brand__quote em {
+  color: var(--text-gold);
+  font-style: normal;
+}
+
+.auth-brand__points {
+  display: grid;
+  gap: 0.7rem;
+  max-width: 380px;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+}
+
+.auth-point {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  color: var(--text-2);
+  font-size: var(--fs-md);
+}
+
+.auth-point .icon {
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+/* ---- Right form panel -------------------------------------------------------------------- */
+.auth-panel {
+  display: grid;
+  align-content: center;
+  gap: 1.5rem;
+  padding: clamp(1.6rem, 4vw, 3.2rem) clamp(1.3rem, 4vw, 3.4rem);
+}
+
+.auth-panel__inner {
+  width: min(100%, 430px);
+  margin-inline: auto;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.auth-head__title {
+  font-size: clamp(1.8rem, 3.6vw, 2.4rem);
+}
+
+.auth-head__sub {
+  margin-top: 0.5rem;
+  color: var(--text-2);
+}
+
+.auth-alt {
+  text-align: center;
+  font-size: var(--fs-md);
+  color: var(--text-2);
+}
+
+.auth-alt a {
+  font-weight: 700;
+}
+
+/* Role preview cards after login */
+.role-preview {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.role-preview__card {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  animation: rise-in 0.4s var(--ease-out) both;
+}
+
+.role-preview__icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.role-preview__text {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.role-preview__text strong {
+  font-size: var(--fs-md);
+}
+
+.role-preview__text span {
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+}
+
+/* ==========================================================================
+   ACCOUNT PAGE
+   ========================================================================== */
+.account-layout {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 1.6rem;
+  align-items: start;
+}
+
+.profile-card {
+  display: grid;
+  gap: 1.05rem;
+  justify-items: center;
+  padding: 2rem 1.6rem;
+  text-align: center;
+}
+
+.profile-card__name {
+  font-size: var(--fs-xl);
+  line-height: 1.25;
+}
+
+.profile-card__rows {
+  width: 100%;
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 0.4rem;
+}
+
+.profile-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  font-size: var(--fs-sm);
+}
+
+.profile-row .icon {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.profile-row__label {
+  color: var(--text-3);
+}
+
+.profile-row__value {
+  margin-left: auto;
+  color: var(--text-2);
+  font-weight: 600;
+  max-width: 55%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-quick {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 0.9rem;
+}
+
+.quick-card {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1.15rem 1.2rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  transition: border-color var(--t-med) var(--ease), transform var(--t-med) var(--ease-out);
+}
+
+.quick-card:hover {
+  border-color: var(--accent-line);
+  transform: translateY(-3px);
+}
+
+.quick-card__icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  color: var(--accent);
+}
+
+.quick-card__title {
+  font-family: var(--font-body);
+  font-size: var(--fs-md);
+  font-weight: 700;
+}
+
+.quick-card__text {
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+}
+
+/* session/security info card */
+.security-list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.security-item {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+}
+
+.security-item .icon {
+  color: var(--success);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.security-item strong {
+  display: block;
+  font-size: var(--fs-md);
+}
+
+.security-item span {
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+}

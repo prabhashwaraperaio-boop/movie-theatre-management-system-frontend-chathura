@@ -1,0 +1,410 @@
+/* ==========================================================================
+   CineLux — Responsive rules (final layer, page-specific + shell).
+   Breakpoints: 1440 / 1280 / 1024 / 768 / 480 / 320.
+   Goal: zero horizontal overflow at 320px.
+   ========================================================================== */
+
+/* ---- ≤ 1180px: tighten grids ---------------------------------------------- */
+@media (max-width: 1180px) {
+  .checkout-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .order-rail {
+    position: static;
+    order: -1;
+  }
+
+  .seat-page {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .selection-summary {
+    position: static;
+  }
+
+  .account-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .movie-details__inner {
+    grid-template-columns: 232px minmax(0, 1fr);
+    gap: 1.6rem;
+  }
+}
+
+/* ---- ≤ 1024px: tablet --------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .admin-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .admin-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 274px;
+    transform: translateX(-102%);
+    transition: transform var(--t-slow) var(--ease-out);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .admin-sidebar.is-open {
+    transform: none;
+  }
+
+  .admin-burger {
+    display: block;
+  }
+
+  .experience__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero__media {
+    display: none;
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  .ticket {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ticket__perf {
+    width: auto;
+    height: 2px;
+    margin: 0 18px;
+    background-image: linear-gradient(90deg, var(--line-strong) 55%, transparent 45%);
+    background-size: 12px 2px;
+    background-repeat: repeat-x;
+  }
+
+  .ticket__perf::before,
+  .ticket__perf::after {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .ticket__perf::before { left: -11px; }
+  .ticket__perf::after { left: auto; right: -11px; }
+
+  .ticket__stub {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    text-align: left;
+    gap: 1.4rem;
+  }
+
+  .ticket__stub > * {
+    grid-column: 1;
+  }
+
+  .ticket__stub .ticket__stub-visual {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+  }
+
+  .booking-card {
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+
+  .booking-card__facts {
+    grid-column: 1 / -1;
+  }
+
+  .booking-card__actions {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .booking-card__total {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    align-self: start;
+  }
+}
+
+/* ---- ≤ 900px: auth split collapses ------------------------------------------------- */
+@media (max-width: 900px) {
+  .auth-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .auth-brand {
+    display: none;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+  }
+}
+
+/* ---- ≤ 768px: mobile navigation ----------------------------------------------------- */
+@media (max-width: 768px) {
+  :root {
+    --header-h: 62px;
+    --seat-size: 30px;
+    --seat-gap: 5px;
+  }
+
+  .nav-links,
+  .nav-auth,
+  .user-menu__name,
+  .user-menu__caret {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .mobile-drawer {
+    display: block;
+  }
+
+  .user-menu__trigger {
+    padding: 0.25rem;
+    border: none;
+    background: transparent;
+  }
+
+  .user-menu__panel {
+    right: -0.4rem;
+  }
+
+  .nav-search.is-open .nav-search__form {
+    width: min(210px, 52vw);
+  }
+
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7rem;
+  }
+
+  .experience__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .movie-grid {
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 1.1rem;
+  }
+
+  .movie-details__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .movie-details__poster {
+    position: static;
+    width: 190px;
+    margin-inline: auto;
+  }
+
+  .movies-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .movies-toolbar__search {
+    max-width: none;
+  }
+
+  .continue-bar {
+    flex-wrap: wrap;
+  }
+
+  .continue-bar__info {
+    flex: 1 1 100%;
+  }
+
+  .continue-bar .btn {
+    flex: 1 1 100%;
+  }
+
+  .pay-methods {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .admin-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-toolbar__filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .admin-toolbar .btn {
+    width: 100%;
+  }
+
+  .form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lookup-form {
+    flex-direction: column;
+  }
+
+  .lookup-form .btn {
+    width: 100%;
+  }
+}
+
+/* ---- ≤ 560px: small phones ----------------------------------------------------------- */
+@media (max-width: 560px) {
+  .container {
+    width: min(100% - 1.7rem, var(--container));
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+  }
+
+  .hero__medal {
+    right: 6px;
+    width: 76px;
+    height: 76px;
+  }
+
+  .movie-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .showtime-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pay-methods {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .wallet-auth__actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ticket__movie {
+    grid-template-columns: 86px minmax(0, 1fr);
+    gap: 0.9rem;
+  }
+
+  .ticket__main {
+    padding: 1.25rem 1.15rem 1.2rem;
+  }
+
+  .ticket__stub {
+    grid-template-columns: minmax(0, 1fr);
+    text-align: center;
+    justify-items: center;
+  }
+
+  .ticket__stub .ticket__stub-visual {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .ticket-actions .btn {
+    width: 100%;
+  }
+
+  .toast-container {
+    right: 0.85rem;
+    left: 0.85rem;
+    width: auto;
+  }
+
+  .order-seat-row__type {
+    display: none;
+  }
+
+  .modal {
+    width: 100%;
+  }
+
+  .modal__body {
+    padding: 1.15rem 1.1rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: minmax(0, 1fr));
+    gap: 1.7rem;
+  }
+
+  .footer-bottom {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .booking-card {
+    grid-template-columns: 58px minmax(0, 1fr);
+    padding: 0.95rem;
+  }
+
+  .booking-card__total {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
+    margin-top: 0.4rem;
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .seat-row__label {
+    width: 18px;
+    font-size: 10px;
+  }
+}
+
+/* ---- ≤ 360px: narrowest ------------------------------------------------------------- */
+@media (max-width: 360px) {
+  :root {
+    --seat-size: 26px;
+    --seat-gap: 4px;
+  }
+
+  .brand__name {
+    font-size: 1.18rem;
+  }
+
+  .nav-search.is-open .nav-search__form {
+    width: 56vw;
+  }
+
+  .movie-grid {
+    gap: 0.65rem;
+  }
+
+  .movie-card__body {
+    padding: 0.75rem 0.7rem 0.85rem;
+  }
+
+  .hero__title {
+    font-size: 2.1rem;
+  }
+
+  .demo-card__number {
+    font-size: 0.92rem;
+  }
+
+  .qr-deco {
+    width: 104px;
+    height: 104px;
+  }
+}
+
+/* ---- print is handled in print.css ---------------------------------------------------- */

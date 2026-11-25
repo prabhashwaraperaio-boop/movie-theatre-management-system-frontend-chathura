@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Seats · CineLux</title>
+  <meta name="description" content="Choose your seats on the live CineLux seat map — standard and premium rows with real-time availability.">
+  <meta name="theme-color" content="#0B1020">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Marcellus&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/booking.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="site-header"></div>
+
+  <main id="main" class="page-enter">
+    <div class="container container--wide" style="padding-top: 1.6rem; padding-bottom: clamp(4rem, 8vw, 7rem);">
+      <div id="showtime-header"></div>
+
+      <div class="seat-page">
+        <!-- Auditorium -->
+        <div>
+          <section class="auditorium" aria-label="Cinema auditorium seat map">
+            <div class="cinema-screen" role="presentation">
+              <div class="cinema-screen__curve"></div>
+              <span class="cinema-screen__label">Screen</span>
+            </div>
+            <div id="seatmap-host" aria-busy="true"></div>
+            <div id="seat-legend" class="seat-legend"></div>
+          </section>
+        </div>
+
+        <!-- Sticky booking summary -->
+        <aside id="selection-summary" class="selection-summary" hidden aria-label="Booking summary"></aside>
+      </div>
+
+      <!-- Mobile-friendly continue bar -->
+      <div id="continue-bar" class="continue-bar" hidden>
+        <div class="continue-bar__info">
+          <span class="continue-bar__seats" id="continue-seats-label">Select at least one seat</span>
+          <span class="continue-bar__total" id="continue-total-label"></span>
+        </div>
+        <div class="max-seats-pill" id="max-seats-pill" title="Maximum 8 seats per booking"></div>
+        <button type="button" class="btn btn--primary btn--lg" id="continue-btn" disabled>
+          Reserve Seats &amp; Continue
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script type="module" src="js/pages/seat-selection.js"></script>
+</body>
+</html>

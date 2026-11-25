@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout · CineLux</title>
+  <meta name="description" content="Review your seats and complete the demo payment at CineLux checkout.">
+  <meta name="theme-color" content="#0B1020">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Marcellus&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/checkout.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="site-header"></div>
+
+  <main id="main" class="page-enter">
+    <div class="container container--wide" style="padding-top: 1.6rem; padding-bottom: clamp(4rem, 8vw, 7rem);">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumbs__sep" aria-hidden="true">/</span>
+        <a href="movies.html">Movies</a>
+        <span class="breadcrumbs__sep" aria-hidden="true">/</span>
+        <span aria-current="page">Checkout</span>
+      </nav>
+      <header class="section-head" style="margin-bottom: 0.4rem">
+        <div>
+          <p class="section-eyebrow">Two steps left</p>
+          <h1 class="section-title">Secure Checkout</h1>
+        </div>
+      </header>
+
+      <div class="demo-notice" role="alert" style="margin-bottom: 1.3rem;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4.5 6v6c0 4.5 3 7.9 7.5 9 4.5-1.1 7.5-4.5 7.5-9V6z"/><path d="m9 12 2 2 4-4.5"/></svg>
+        <span>DEMO PAYMENT MODE — No real money will be charged or collected.</span>
+      </div>
+
+      <div id="checkout-host">
+        <div class="checkout-layout">
+          <!-- LEFT: order summary -->
+          <aside class="order-rail">
+            <div class="order-card card--pad" id="order-summary">
+              <div style="display:grid;gap:0.7rem">
+                <div class="skeleton skeleton--line w-70" style="height:20px"></div>
+                <div class="skeleton skeleton--line w-45"></div>
+                <div class="skeleton skeleton--line w-30"></div>
+              </div>
+            </div>
+            <div id="hold-timer-slot" hidden></div>
+          </aside>
+
+          <!-- RIGHT: reserve / payment -->
+          <section class="payment-panel" aria-label="Payment">
+            <div class="payment-panel__head">
+              <h2 class="payment-panel__title" id="payment-title">Payment</h2>
+              <div class="payment-steps" id="payment-steps">
+                <span class="is-current">1 · Reserve</span>
+                <span>2 · Pay</span>
+              </div>
+            </div>
+
+            <div id="reserve-step">
+              <p class="text-2" style="margin-bottom:1rem">Your seats are ready. Reserve them now to open the payment step — the cinema backend will hold them for <strong>10 minutes</strong>.</p>
+              <button type="button" class="btn btn--primary btn--lg btn--block" id="reserve-btn">
+                Reserve Seats &amp; Continue
+              </button>
+            </div>
+
+            <div id="pay-step" hidden>
+              <p class="field-hint" style="margin-bottom:0.9rem">Choose how you would like to complete this <strong>demo</strong> payment:</p>
+              <div class="pay-methods" id="pay-methods"></div>
+              <div id="pay-panel" style="margin-top:1.1rem"></div>
+              <div class="secure-footnote">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4.5 6v6c0 4.5 3 7.9 7.5 9 4.5-1.1 7.5-4.5 7.5-9V6z"/><path d="m9 12 2 2 4-4.5"/></svg>
+                <span>Payments are simulated end-to-end. No card numbers, wallet tokens or credentials are ever stored or transmitted.</span>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script type="module" src="js/pages/checkout.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create account · CineLux</title>
+  <meta name="description" content="Create your free CineLux account and start booking premium cinema seats.">
+  <meta name="theme-color" content="#0B1020">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Marcellus&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/auth.css?v=2">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="site-header"></div>
+
+  <main id="main">
+    <div class="auth-shell">
+      <!-- Brand panel -->
+      <aside class="auth-brand" aria-hidden="true">
+        <!-- Background faded artwork -->
+        <div class="auth-brand__art" style="position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;">
+          <img src="images/hero/hero-collage.jpg" alt="" style="width:100%;height:100%;object-fit:cover;opacity:0.42;filter:contrast(1.08) saturate(1.15);">
+        </div>
+        <div class="auth-brand__scrim" style="position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg, rgba(8,13,26,0.35) 0%, rgba(8,13,26,0.65) 50%, rgba(8,13,26,0.92) 100%), radial-gradient(circle at 40% 30%, transparent 15%, rgba(8,13,26,0.85) 85%);"></div>
+        <div class="auth-brand__reel" id="auth-reel" style="position:relative;z-index:2;">
+          <div class="auth-brand__frame">
+            <img src="images/movies/avatar.jpg" alt="Avatar: The Way of Water" loading="lazy">
+          </div>
+          <div class="auth-brand__frame">
+            <img src="images/movies/dune.jpg" alt="Dune: Part Two" loading="lazy">
+          </div>
+          <div class="auth-brand__frame">
+            <img src="images/movies/redemption.jpg" alt="The Shawshank Redemption" loading="lazy">
+          </div>
+        </div>
+        <p class="auth-brand__quote" style="position:relative;z-index:2;">Join CineLux and your next night out is <em>two taps</em> away.</p>
+        <div class="auth-brand__points" style="position:relative;z-index:2;">
+          <span class="auth-point">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>
+            Free account — no card needed
+          </span>
+          <span class="auth-point">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>
+            Your bookings and tickets in one place
+          </span>
+          <span class="auth-point">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>
+            Seats held while you decide
+          </span>
+        </div>
+      </aside>
+
+      <!-- Form panel -->
+      <section class="auth-panel">
+        <div class="auth-panel__inner page-enter">
+          <header class="auth-head">
+            <p class="section-eyebrow">Become a member</p>
+            <h1 class="auth-head__title">Create your account</h1>
+            <p class="auth-head__sub">Registration takes less than a minute. The backend requires a minimum password length of 8 characters.</p>
+          </header>
+
+          <form class="form" id="register-form" novalidate>
+            <div class="form-field">
+              <label class="form-label" for="reg-name">Full name <span class="req">*</span></label>
+              <input class="form-input" id="reg-name" name="fullName" type="text" autocomplete="name" placeholder="e.g. Amara Fernando" maxlength="100" required>
+              <p class="field-error" aria-live="polite"></p>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="reg-email">Email <span class="req">*</span></label>
+              <input class="form-input" id="reg-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" maxlength="254" required>
+              <p class="field-error" aria-live="polite"></p>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="reg-password">Password <span class="req">*</span></label>
+              <div class="input-group">
+                <input class="form-input" id="reg-password" name="password" type="password" autocomplete="new-password" placeholder="At least 8 characters" maxlength="128" required>
+                <button type="button" class="input-group__action" data-toggle-password aria-label="Show password">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.5"/></svg>
+                </button>
+              </div>
+              <div class="strength-meter" id="strength-meter" hidden>
+                <div class="strength-meter__track">
+                  <span class="strength-meter__bar"></span>
+                  <span class="strength-meter__bar"></span>
+                  <span class="strength-meter__bar"></span>
+                  <span class="strength-meter__bar"></span>
+                </div>
+                <p class="strength-meter__label">Password strength</p>
+              </div>
+              <p class="field-error" aria-live="polite"></p>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="reg-confirm">Confirm password <span class="req">*</span></label>
+              <div class="input-group">
+                <input class="form-input" id="reg-confirm" name="confirmPassword" type="password" autocomplete="new-password" placeholder="Repeat your password" maxlength="128" required>
+                <button type="button" class="input-group__action" data-toggle-password aria-label="Show password">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.5"/></svg>
+                </button>
+              </div>
+              <p class="field-error" aria-live="polite"></p>
+            </div>
+            <button type="submit" class="btn btn--primary btn--lg btn--block" id="register-submit">Create account</button>
+            <p class="field-hint">Confirm password is checked in the browser only — it is never sent to the backend.</p>
+          </form>
+
+          <p class="auth-alt">Already a member? <a href="login.html">Sign in instead</a></p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script type="module" src="js/pages/register.js"></script>
+</body>
+</html>

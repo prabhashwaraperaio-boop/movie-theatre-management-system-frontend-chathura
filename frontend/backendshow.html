@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Monitor · CineLux</title>
+  <meta name="description" content="CineLux backend health monitor.">
+  <meta name="theme-color" content="#0B1020">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Marcellus&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="site-header"></div>
+
+  <main id="main" class="page-enter">
+    <div class="container container--narrow" style="padding-top: 1.8rem;">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumbs__sep" aria-hidden="true">/</span>
+        <span aria-current="page">System Monitor</span>
+      </nav>
+      <header class="page-hero" style="padding-bottom: 0.6rem">
+        <p class="section-eyebrow">Operations</p>
+        <h1 class="page-hero__title">System Monitor</h1>
+        <p class="page-hero__sub">Live health of the CineLux backend (GET /api/health). This page is served by Express at <span class="mono">/monitor</span>.</p>
+      </header>
+
+      <section class="section" style="padding-top: 1.4rem;">
+        <div class="monitor-grid" id="monitor-grid">
+          <div class="monitor-card">
+            <span class="monitor-card__led" id="led-api"></span>
+            <h2 class="card__title" style="font-size:var(--fs-lg)">Backend API</h2>
+            <p class="text-2" id="api-status">Checking…</p>
+            <button type="button" class="btn btn--secondary btn--sm" id="refresh-health">Re-check</button>
+          </div>
+          <div class="monitor-card">
+            <span class="monitor-card__led" id="led-db"></span>
+            <h2 class="card__title" style="font-size:var(--fs-lg)">PostgreSQL</h2>
+            <p class="text-2" id="db-status">Checking…</p>
+            <p class="field-hint">Database connectivity reported by the backend.</p>
+          </div>
+          <div class="monitor-card">
+            <span class="monitor-card__led monitor-card__led--ok"></span>
+            <h2 class="card__title" style="font-size:var(--fs-lg)">Frontend</h2>
+            <p class="text-2">This page loaded successfully — static assets are being served.</p>
+            <p class="field-hint">Last checked: <span id="last-check" class="mono"></span></p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script type="module">
+    import { initPage } from "./js/core/session.js";
+    import { apiRequest } from "./js/core/api.js";
+    import { qs } from "./js/utils/dom.js";
+    import { toast } from "./js/components/toast.js";
+
+    async function checkHealth() {
+      const apiStatus = qs("#api-status");
+      const dbStatus = qs("#db-status");
+      const ledApi = qs("#led-api");
+      const ledDb = qs("#led-db");
+      const lastCheck = qs("#last-check");
+
+      apiStatus.textContent = "Checking…";
+      dbStatus.textContent = "Checking…";
+      ledApi.className = "monitor-card__led";
+      ledDb.className = "monitor-card__led";
+
+      try {
+        const data = await apiRequest("/api/health", { auth: false, timeoutMs: 6000 });
+        const ok = data?.status === "ok" && data?.db === "ok";
+        ledApi.className = `monitor-card__led${ok ? " monitor-card__led--ok" : " monitor-card__led--down"}`;
+        ledDb.className = `monitor-card__led${data?.db === "ok" ? " monitor-card__led--ok" : " monitor-card__led--down"}`;
+        apiStatus.textContent = ok ? "API is up and responding." : `API responded with status: ${data?.status ?? "unknown"}`;
+        dbStatus.textContent = data?.db === "ok" ? "Database connection is healthy." : "Database is not responding.";
+      } catch {
+        ledApi.className = "monitor-card__led monitor-card__led--down";
+        ledDb.className = "monitor-card__led monitor-card__led--down";
+        apiStatus.textContent = "Cannot reach the backend on port 4000.";
+        dbStatus.textContent = "Unknown — the backend is unreachable.";
+      } finally {
+        lastCheck.textContent = new Date().toLocaleTimeString();
+      }
+    }
+
+    async function main() {
+      await initPage({ auth: "any" });
+      qs("#refresh-health").addEventListener("click", () => {
+        toast.info("Re-checking backend health…");
+        checkHealth();
+      });
+      checkHealth();
+      setInterval(checkHealth, 30000);
+    }
+
+    main();
+  </script>
+</body>
+</html>
